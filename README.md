@@ -1,4 +1,4 @@
-# mikro7, SEVEN SEGMENT LIBRARY FOR ARDUINO
+# mikro7,LIBRARY SEVEN SEGMENT  FOR ARDUINO
 Seven Segment arduino library, drive with ic 74hc595 and ULN2803, we create modul seven segment 3" Commond Anode. This module easy to use, low price and high quality. 
 This libray have four function, perhaps we will update function. 
 
