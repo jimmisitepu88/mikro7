@@ -27,7 +27,7 @@ void mikro7::begin(byte Data, byte Latch, byte Clock){
 void mikro7::display(uint16_t POS1, bool flag){ 
 	dt_temp = POS1;
 	if(flag == DOT){
-		bit_flag = 0b00010000;
+		bit_flag = 0b10000000;
 	}
 	else {
 		bit_flag = 0b00000000;
@@ -42,8 +42,7 @@ void mikro7::display(uint16_t POS1, bool flag){
 	
 	digitalWrite(LATCH, LOW);  //LATCH_0;
   if (POS1 < 10){
-    
-		shiftOut(DATA, CLOCK,MSBFIRST,decDigits[satuan_POS1]);
+        shiftOut(DATA, CLOCK,MSBFIRST,decDigits[satuan_POS1]);
 	if ( flag == DOT ){
 		shiftOut(DATA, CLOCK,MSBFIRST,decDigits[0]^bit_flag);
 	}else shiftOut(DATA, CLOCK,MSBFIRST,0x00^bit_flag);
@@ -77,7 +76,7 @@ void mikro7::display(uint16_t POS1, bool flag){
 
 }
 
-void mikro7::on(){
+void mikro7::off(){
   digitalWrite(LATCH, LOW);//LATCH_0;
 
   shiftOut(DATA, CLOCK,MSBFIRST,0xff);
@@ -88,11 +87,22 @@ void mikro7::on(){
   digitalWrite(LATCH, HIGH);//LATCH_1;
 }
 
-void mikro7::off(){
+void mikro7::on(){
   digitalWrite(LATCH, LOW);//LATCH_0;
   shiftOut(DATA, CLOCK,MSBFIRST,0x00);
   shiftOut(DATA, CLOCK,MSBFIRST,0x00);
   shiftOut(DATA, CLOCK,MSBFIRST,0x00);
   shiftOut(DATA, CLOCK,MSBFIRST,0x00);
   digitalWrite(LATCH, HIGH);//LATCH_1;
+}
+void mikro7::test(){
+	for ( check_all = 0; check_all < 10; check_all++){
+	  digitalWrite(LATCH, LOW);//LATCH_0;
+	  shiftOut(DATA, CLOCK,MSBFIRST,decDigits[check_all]);
+	  shiftOut(DATA, CLOCK,MSBFIRST,decDigits[check_all]);
+	  shiftOut(DATA, CLOCK,MSBFIRST,decDigits[check_all]);
+	  shiftOut(DATA, CLOCK,MSBFIRST,decDigits[check_all]);
+	  digitalWrite(LATCH, HIGH);//LATCH_1;	
+	  delay(500);
+	}
 }
